@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+  <style>
+   .allIn{
+       
+        position:absolute;
+            top:-20px;
+            left:-20px;
+            right:-20px;
+            bottom:-20px;
+            filter:blur(14px);
+            background-position: 100% 100%;
+            background: url('./images/mgthree.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: -4;
+    }
+  </style>
+    <title>Document</title>
+</head>
+<body>
+        <div class="allIn"></div>
+    <div class="first-div first-div1">
+        <div class="first-I"><a href="index.html">Home</a></div>
+        <div class="first-II"><a href="about.html">About Us</a></div>
+        <div class="first-III"><a href="log.php">Log In</a></div>
+    </div>
+    <div class="wrap">
+    <div class="userLogin">
+        <form action="log.php" method="POST">
+      <table class="tb-newuser" align="center" width="60%" cellpadding="10">
+        <tr>
+<th class="heading-table" colspan="2">Registration</th>
+</tr>
+<tr>
+<td>
+<label class="lb">Fullname <br>  <input required type="text" placeholder=" Enter your name" onkeyup="fname(event)"  name="fullname" class="newlogin-fm first-input"></label></td>
+<td>
+<label class="lb">Username <br> <input required type="text" placeholder=" Enter your username" onkeyup="userValidation(event)"  name="username" class="newlogin-fm username-input" ></label> 
+</td>
+</tr>
+<tr>
+<td>
+<label class="lb">Email <br> <input required type="email" placeholder="Enter your email" onkeyup="emailValidation(event)"   name="email" class="newlogin-fm email-input"></label></td>
+<td>
+<label class="lb">Phone Number <br> <input required type="number" placeholder="Enter your number" onkeyup="numValidation(event)"  name="number" class="newlogin-fm number-input"></label>
+</td>
+</tr>
+<tr>
+    <td>
+     
+    <label class="lb">Password <br> <input required type="password" placeholder="Enter your password"
+        title="password should contain atleast one number and one special character 6 number to long"  name="passwords"
+         onkeyup="passValidation(event)" class="newlogin-fm pass-input">
+      <span class="fa-eye" onclick="myfun(event)" >
+          <i class="fa-one "></i>
+      </span>
+      
+        </label>
+    </td>
+    <td>
+    <label class="lb">Confirm Password <br> <input required type="password" placeholder="confirm your password" 
+         name="password-sec" onkeyup="passValidation2(event)" title="As same as first password" class="newlogin-fm pass2-input">
+        <span class="fa-eye" onclick="myfun2(event)">
+            <i class="fa-one "></i>
+        </span>
+    </label>
+    </td>
+</tr>
+<tr >
+        <td colspan="2" >
+        <label class="lb">Male: <input required type="radio" placeholder="Enter your password"  name="rd" class="gender-details"></label>
+        <label class="lb">Female: <input required type="radio" placeholder="confirm your password"  name="rd" class="gender-details"></label>
+        <label class="lb">Other: <input required type="radio" placeholder="confirm your password"  name="rd" class="gender-details"></label>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" id="abc" value="Register" name="submited" class="reg-btn">
+        </td>
+    </tr>
+      </table>
+    </form>
+    </div>
+</div>
+<script>
+var fullname = document.querySelector(".first-input");
+var username = document.querySelector(".username-input");
+var d = document.getElementById("abc");
+
+var emailVal = document.querySelector(".email-input");
+var numVal = document.querySelector(".number-input");
+var passVal = document.querySelector(".pass-input");
+var passVal2 = document.querySelector(".pass2-input");
+var fa = document.getElementsByClassName("fa-eye");
+var reg = /^[a-z A-Z]+$/;
+function fname(e){
+  
+if(!(reg.test(fullname.value) || fullname.value.length==0)){
+  fullname.style.border = '2px solid red';
+
+}else{
+    fullname.style.border = '2px solid chartreuse';
+}
+}
+fullname.addEventListener("blur",(e)=>{
+    console.log("its");
+    if(!reg.test(fullname.value)){
+  fullname.style.border = '2px solid red';
+   fullname.value = "";
+}   
+});
+
+var reg2 = /^([A-Za-z0-9][^\W]*)$/;
+function userValidation(e){
+console.log(username.value.length);
+if(!(reg2.test(username.value) || username.value.length == 0)){
+username.style.border = "2px solid red";  
+}else{
+ username.style.border = "2px solid chartreuse";
+}
+}
+username.addEventListener("blur",(e)=>{
+if(!reg2.test(username.value)){
+    username.style.border = "2px solid red";
+    username.value = ""; 
+}
+});
+var reg3 = /^([\.\_a-zA-Z0-9]+)@([a-zA-Z]+)\.([a-zA-Z]){2,8}$/;
+    var reg4 = /^([\.\_a-zA-Z0-9]+)@([a-zA-Z]+)\.([a-zA-Z]){2,3}\.[a-zA-Z]{1,3}$/;
+function emailValidation(e){
+
+    if((reg3.test(emailVal.value) || reg4.test(emailVal.value) || emailVal.value.length != 0)){
+        
+        emailVal.style.border = "2px solid chartreuse"; 
+       
+    }else{
+        emailVal.style.border = "2px solid red";
+    }
+
+}
+emailVal.addEventListener("blur",(e)=>{
+    if(!reg3.test(emailVal.value) || reg4.test(emailVal.value)){
+        emailVal.style.border = "2px solid red";
+        emailVal.value = "";
+    }
+});
+var reg5 = /^[0-9]{10}$/;
+function numValidation(e){
+   
+    if(reg5.test(numVal.value) || numVal.value.length == 0){
+        numVal.style.border = "2px solid chartreuse";
+    }else{
+        numVal.style.border = "2px solid red"; 
+    }
+}
+numVal.addEventListener("blur",(e)=>{
+    if(!reg5.test(numVal.value)){
+        numVal.style.border = "2px solid red"; 
+        numVal.value = ""; 
+    }
+});
+var reg6 = /[a-zA-z0-9!@#$%^&*]{4,10}/;
+function passValidation(e){
+    
+    if(passVal.value.length > 6 && reg6.test(passVal)){
+        passVal.style.border = "2px solid chartreuse";
+    }else{
+        passVal.style.border = "2px solid red";
+    }
+}
+passVal.addEventListener("change",(e)=>{
+    if(!reg6.test(passVal.value)){
+        passVal.style.border = "2px solid red"; 
+        passVal.value = ""; 
+    }
+});
+function myfun(e){
+    if(fa[0].firstElementChild.className == "fa-one" && passVal.value.length != 0){
+        fa[0].firstElementChild.classList.remove("fa-one");
+        fa[0].firstElementChild.classList.add("fa-two");     
+            passVal.type = "text";        
+    }else{
+        fa[0].firstElementChild.classList.remove("fa-two");
+        fa[0].firstElementChild.classList.add("fa-one");
+        passVal.type = "password";
+    } 
+}
+function myfun2(e){
+    if(fa[1].firstElementChild.className == "fa-one" && passVal2.value.length !=0){
+        fa[1].firstElementChild.classList.remove("fa-one");
+        fa[1].firstElementChild.classList.add("fa-two");     
+            passVal2.type = "text";
+        
+    }else{
+        fa[1].firstElementChild.classList.remove("fa-two");
+        fa[1].firstElementChild.classList.add("fa-one");
+        passVal2.type = "password";
+    }
+}
+function passValidation2(e){
+  
+    if((passVal2.value == passVal.value) && (reg6.test(passVal2.value) && passVal2.value.length != 0)){
+        passVal2.style.border = "2px solid chartreuse";
+    }else{
+        passVal2.style.border = "2px solid red";
+    }
+}
+passVal2.addEventListener("change",(e)=>{
+    if(!reg6.test(passVal2.value) ||  !(passVal2.value == passVal.value) ){
+        passVal2.style.border = "2px solid red"; 
+        passVal2.value = ""; 
+    }
+});
+
+
+</script>
+
+
+</body>
+
+</html>
